@@ -79,10 +79,10 @@ export const RemotionRoot: React.FC = () => {
         <Composition
           id="BrandProYTReel"
           component={BrandProYTReel}
-          durationInFrames={1956}
+          durationInFrames={1625}
           fps={30}
-          width={1080}
-          height={1920}
+          width={1920}
+          height={1080}
         />
 </>
   );
