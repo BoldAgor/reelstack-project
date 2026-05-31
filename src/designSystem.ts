@@ -7,22 +7,12 @@
  *   <div style={{ color: ds.color.fg, fontFamily: ds.font.sans }}>
  */
 
-import { loadFont as loadGeist } from "@remotion/google-fonts/Geist";
-import { loadFont as loadGeistMono } from "@remotion/google-fonts/GeistMono";
-
 // ═══════════════════════════════════════════════════════════════
-// FONTS  — Geist (Vercel), same as devini.io
+// FONTS  — System fonts (render-safe fallback)
 // ═══════════════════════════════════════════════════════════════
 
-const { fontFamily: geistSans } = loadGeist("normal", {
-  weights: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-});
-
-const { fontFamily: geistMono } = loadGeistMono("normal", {
-  weights: ["400", "500", "600"],
-  subsets: ["latin"],
-});
+const geistSans  = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif";
+const geistMono  = "'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', Menlo, Courier, monospace";
 
 // ═══════════════════════════════════════════════════════════════
 // COLOR SCALES  — Zinc neutral + Indigo accent (from devini.io)

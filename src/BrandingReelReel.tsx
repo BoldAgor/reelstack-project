@@ -2,43 +2,42 @@
  * BrandingReelReel — Glass Iridescent / graphify base
  *
  * Script: "Most business owners know the drill..." (branding/design services pitch)
- * Duration: ~55s → 1650 frames @ 30fps
+ * Duration: 54.1s → 1625 frames @ 30fps
  *
- * BEAT map (estimated — lock to actual VO with /reelstack-beats):
- *   hook     0      "Most business owners know the drill..."
- *   pain     210    "...there is never enough time and you're not a designer"
- *   judge    480    "People will judge your business in seconds"
- *   agitate  660    "Confusing, outdated look makes them lose trust instantly"
- *   pivot    840    "That's the specific problem that I solve"
- *   solve    1020   "Clean social media design, strong branding, modern websites"
- *   cta      1440   "If you're ready for your business to finally look as good as it is"
- *   end      1650
- *
- * Replace REFERENCE-STRIP assets before publishing.
- * Run /reelstack-beats <vo.wav> to lock BEAT to real timestamps.
+ * BEAT map — locked to voiceover.mp3 via ffmpeg silence detection:
+ *   hook     0      0.0s  "Most business owners know the drill..."
+ *   pain     237    7.9s  "but in reality, there is never enough time..."
+ *   judge    408    13.6s "People will judge your business in seconds..."
+ *   agitate  528    17.6s "You're confusing. Outdated look..."
+ *   pivot    636    21.2s "That's the specific problem that I solve."
+ *   solve    702    23.4s "I create the clean social media design..."
+ *   cta      1233   41.1s "If you're ready for your business..."
+ *   end      1625   54.1s
  */
 import React from "react";
 import {
   AbsoluteFill,
+  Audio,
   Easing,
   Sequence,
   interpolate,
   spring,
+  staticFile,
   useCurrentFrame,
 } from "remotion";
 import { ds } from "./designSystem";
 
-export const BRANDING_TOTAL = 1650;
+export const BRANDING_TOTAL = 1625;
 
 export const BEAT = {
   hook:    0,
-  pain:    210,   // 7.0s
-  judge:   480,   // 16.0s
-  agitate: 660,   // 22.0s
-  pivot:   840,   // 28.0s
-  solve:   1020,  // 34.0s
-  cta:     1440,  // 48.0s
-  end:     1650,  // 55.0s
+  pain:    237,   // 7.9s
+  judge:   408,   // 13.6s
+  agitate: 528,   // 17.6s
+  pivot:   636,   // 21.2s
+  solve:   702,   // 23.4s
+  cta:     1233,  // 41.1s
+  end:     1625,  // 54.1s
 } as const;
 
 // ─── Easing ───────────────────────────────────────────────────────────────────
@@ -856,6 +855,7 @@ const CtaScene: React.FC = () => {
 export const BrandingReelReel: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: C.bg, fontFamily: FONT }}>
+      <Audio src={staticFile("voiceover.mp3")} />
       <Sequence from={BEAT.hook}    durationInFrames={BEAT.pain    - BEAT.hook}>    <HookScene />    </Sequence>
       <Sequence from={BEAT.pain}    durationInFrames={BEAT.judge   - BEAT.pain}>    <PainScene />    </Sequence>
       <Sequence from={BEAT.judge}   durationInFrames={BEAT.agitate - BEAT.judge}>   <JudgeScene />   </Sequence>
