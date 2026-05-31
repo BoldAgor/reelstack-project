@@ -677,7 +677,6 @@ export const BrandProYTReel: React.FC = () => {
       }}
     >
       <CausticBlobs />
-      <HairlineGrid opacity={0.04} />
 
 
       {/* Scenes */}
