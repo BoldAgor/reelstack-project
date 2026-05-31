@@ -6,11 +6,11 @@
  *
  * BEAT map — locked to voiceover.mp3 via ffmpeg silence detection:
  *   hook     0      0.0s  "Most business owners know the drill..."
- *   pain     237    7.9s  "but in reality, there is never enough time..."
- *   judge    408    13.6s "People will judge your business in seconds..."
- *   agitate  528    17.6s "You're confusing. Outdated look..."
- *   pivot    636    21.2s "That's the specific problem that I solve."
- *   solve    702    23.4s "I create the clean social media design..."
+ *   pain     237    7.9s  "but in reality... website fails to convert"
+ *   judge    528    17.6s "People will judge your business in seconds"
+ *   agitate  618    20.6s "You're confusing. Outdated look..."
+ *   pivot    702    23.4s "That's the specific problem that I solve."
+ *   solve    756    25.2s "I create the clean social media design..."
  *   cta      1233   41.1s "If you're ready for your business..."
  *   end      1625   54.1s
  */
@@ -31,12 +31,12 @@ export const BRANDING_TOTAL = 1625;
 
 export const BEAT = {
   hook:    0,
-  pain:    237,   // 7.9s
-  judge:   408,   // 13.6s
-  agitate: 528,   // 17.6s
-  pivot:   636,   // 21.2s
-  solve:   702,   // 23.4s
-  cta:     1233,  // 41.1s
+  pain:    237,   // 7.9s  — "but in reality..."
+  judge:   528,   // 17.6s — "People will judge..."
+  agitate: 618,   // 20.6s — "You're confusing..."
+  pivot:   702,   // 23.4s — "That's the specific problem..."
+  solve:   756,   // 25.2s — "I create the clean social media design..."
+  cta:     1233,  // 41.1s — "If you're ready..."
   end:     1625,  // 54.1s
 } as const;
 
@@ -491,12 +491,9 @@ const JudgeScene: React.FC = () => {
 const AgitateScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  // Shake on "confusing"
-  const shakeAmp = interpolate(frame, [40, 55, 70], [0, 6, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const shakeX = Math.sin(frame * 1.8) * shakeAmp;
-
-  // Red overlay flash
-  const flashOp = interpolate(frame, [80, 95, 115, 130], [0, 0.12, 0.12, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  // Subtle shake on "confusing" — gentle nudge, not a seizure
+  const shakeAmp = interpolate(frame, [20, 35, 55], [0, 3, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const shakeX = Math.sin(frame * 0.5) * shakeAmp;
 
   return (
     <AbsoluteFill>
@@ -504,8 +501,6 @@ const AgitateScene: React.FC = () => {
       <HairlineGrid />
       <SonarRings accent={C.crimson} secondary={C.rose} />
 
-      {/* Red flash overlay */}
-      <AbsoluteFill style={{ background: C.crimson, opacity: flashOp, pointerEvents: "none" }} />
 
       <div style={{ position: "absolute", top: SAFE_TOP, left: 60 }}>
         <EyebrowPill dot={C.crimson}>04 / THE COST</EyebrowPill>
