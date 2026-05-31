@@ -7,6 +7,7 @@ import { BrandingReelReel } from "./BrandingReelReel";
 import { GraphifyBrandReel } from "./GraphifyBrandReel";
 import { GstackBrandReel } from "./GstackBrandReel";
 import { PaperclipBrandReel } from "./PaperclipBrandReel";
+import { BrandingReelLandscape } from "./BrandingReelLandscape";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -63,6 +64,15 @@ export const RemotionRoot: React.FC = () => {
           fps={30}
           width={1080}
           height={1920}
+        />
+
+        <Composition
+          id="BrandingReelLandscape"
+          component={BrandingReelLandscape}
+          durationInFrames={1625}
+          fps={30}
+          width={1920}
+          height={1080}
         />
 </>
   );
