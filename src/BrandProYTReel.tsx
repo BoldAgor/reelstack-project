@@ -591,6 +591,24 @@ const CtaScene: React.FC = () => {
       <SonarRings />
 
       <div style={{ textAlign: "center", zIndex: 2 }}>
+        {/* Profile photo */}
+        <div style={{
+          display: "flex", justifyContent: "center", marginBottom: 20,
+          opacity: interpolate(local, [0, 22], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
+          transform: `scale(${spring({ frame: local, fps: 30, config: { damping: 14, stiffness: 120 }, from: 0.7, to: 1 })})`,
+        }}>
+          {/* Swap <div> for <Img src={staticFile("profile.jpg")} ...> once uploaded */}
+          <div style={{
+            width: 96, height: 96, borderRadius: "50%", overflow: "hidden",
+            border: "3px solid rgba(255,255,255,0.9)",
+            boxShadow: "0 8px 24px rgba(120,100,180,0.25)",
+            background: `linear-gradient(135deg, ${C.iriViolet}, ${C.iriCyan})`,
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}>
+            <span style={{ fontFamily: FONT, fontSize: 32, fontWeight: 800, color: "#fff", letterSpacing: "-0.04em" }}>EC</span>
+          </div>
+        </div>
+
         {/* Eyebrow */}
         <div style={{ marginBottom: 28, display: "flex", justifyContent: "center", opacity: interpolate(local, [0, 18], [0, 1], { extrapolateRight: "clamp" }) }}>
           <EyebrowPill>06 — Ready?</EyebrowPill>
@@ -627,26 +645,32 @@ const CtaScene: React.FC = () => {
           </div>
         </div>
 
-        {/* Handle */}
-        <div style={{ marginTop: 36, opacity: msgOp, transform: `scale(${msgScale})` }}>
-          <div style={{
-            ...glassBase, borderRadius: 9999, padding: "14px 32px",
-            display: "inline-flex", alignItems: "center", gap: 14,
-          }}>
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={C.inkSoft} strokeWidth="1.6">
+        {/* Social handles row */}
+        <div style={{ marginTop: 36, opacity: msgOp, transform: `scale(${msgScale})`, display: "flex", justifyContent: "center", gap: 20 }}>
+          {/* Instagram */}
+          <div style={{ ...glassBase, borderRadius: 9999, padding: "14px 28px", display: "inline-flex", alignItems: "center", gap: 12 }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={C.inkSoft} strokeWidth="1.6">
               <rect x="3" y="3" width="18" height="18" rx="5" />
               <circle cx="12" cy="12" r="4" />
               <circle cx="17.5" cy="6.5" r="1" fill={C.inkSoft} />
             </svg>
-            <span style={{ fontFamily: FONT, fontSize: 30, fontWeight: 600, color: C.ink, letterSpacing: "-0.01em" }}>@ezeumeanyac</span>
+            <span style={{ fontFamily: FONT, fontSize: 26, fontWeight: 600, color: C.ink, letterSpacing: "-0.01em" }}>excellencebold</span>
+          </div>
+          {/* LinkedIn */}
+          <div style={{ ...glassBase, borderRadius: 9999, padding: "14px 28px", display: "inline-flex", alignItems: "center", gap: 12 }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill={C.inkSoft}>
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+              <rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" />
+            </svg>
+            <span style={{ fontFamily: FONT, fontSize: 26, fontWeight: 600, color: C.ink, letterSpacing: "-0.01em" }}>ezeumeanya-chiagozie</span>
           </div>
         </div>
 
         {/* Tagline */}
         <div style={{
-          marginTop: 22,
+          marginTop: 20,
           opacity: interpolate(local, [190, 220], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
-          fontFamily: MONO, fontSize: 17, color: C.inkDim, letterSpacing: "0.2em", textTransform: "uppercase",
+          fontFamily: MONO, fontSize: 16, color: C.inkDim, letterSpacing: "0.18em", textTransform: "uppercase",
         }}>
           Graphic Design · Branding · Web Development
         </div>
@@ -693,7 +717,7 @@ export const BrandProYTReel: React.FC = () => {
           display: "flex", alignItems: "center", gap: 8,
         }}>
           <div style={{ width: 6, height: 6, borderRadius: 3, background: C.iriViolet, boxShadow: `0 0 8px ${C.iriViolet}` }} />
-          Ezeumeanya C. · Graphic Designer · Awka, Nigeria
+          Ezeumeanya C. · @excellencebold · Awka, Nigeria
         </div>
       </div>
 
