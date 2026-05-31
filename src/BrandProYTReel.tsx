@@ -76,15 +76,13 @@ export const MONO = ds.font.mono;
 // GLASS PRIMITIVES
 // ═══════════════════════════════════════════════════════════════
 export const glassBase: React.CSSProperties = {
-  background:           C.glassFill,
-  backdropFilter:       "blur(32px) saturate(180%)",
-  WebkitBackdropFilter: "blur(32px) saturate(180%)",
-  border:               `1.5px solid ${C.glassBorder}`,
+  background: "rgba(255,255,255,0.82)",
+  border:     "1.5px solid rgba(255,255,255,0.95)",
   boxShadow: [
-    "0 24px 48px -12px rgba(120,100,180,0.22)",
-    "0 8px 16px -4px rgba(120,100,180,0.12)",
-    "inset 0 1.5px 0 rgba(255,255,255,0.95)",
-    "inset 0 -1px 0 rgba(255,255,255,0.30)",
+    "0 24px 48px -12px rgba(120,100,180,0.18)",
+    "0 8px 16px -4px rgba(120,100,180,0.10)",
+    "inset 0 1.5px 0 rgba(255,255,255,1)",
+    "inset 0 -1px 0 rgba(255,255,255,0.50)",
   ].join(", "),
 };
 
@@ -101,8 +99,7 @@ export const CausticBlobs: React.FC = () => {
   ): React.CSSProperties => ({
     position: "absolute",
     width: size, height: size, borderRadius: "50%",
-    background: `radial-gradient(circle at 50% 50%, ${color} 0%, ${color}99 30%, transparent 70%)`,
-    filter: "blur(120px)",
+    background: `radial-gradient(circle at 50% 50%, ${color} 0%, ${color}55 40%, transparent 70%)`,
     left:    cx + Math.sin(t * speedX + phase) * (width  * 0.12),
     top:     cy + Math.cos(t * speedY + phase) * (height * 0.12),
     opacity, pointerEvents: "none",
@@ -192,10 +189,9 @@ export const StaggeredWords: React.FC<{
         const local = frame - (startFrame + i * perWordDelay);
         const opacity = interpolate(local, [0, duration], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease.expoOut });
         const y       = interpolate(local, [0, duration], [32, 0],  { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease.power3Out });
-        const blur    = interpolate(local, [0, duration], [10, 0],  { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
         const isHL = highlight && w.toLowerCase().replace(/[^a-z]/g, "").includes(highlight.toLowerCase());
         return (
-          <span key={i} style={{ display: "inline-block", opacity, transform: `translateY(${y}px)`, filter: `blur(${blur}px)`, color: isHL ? highlightColor : color }}>
+          <span key={i} style={{ display: "inline-block", opacity, transform: `translateY(${y}px)`, color: isHL ? highlightColor : color }}>
             {w}
           </span>
         );
@@ -241,8 +237,7 @@ export const LightBeam: React.FC<{ delay: number; angle: number }> = ({ delay, a
   return (
     <div style={{
       position: "absolute", top: "50%", left: "50%", width: 2200, height: 80,
-      background: `linear-gradient(90deg, transparent 0%, ${C.iriCyan}88 30%, ${C.iriViolet}cc 50%, ${C.iriRose}88 70%, transparent 100%)`,
-      filter: "blur(16px)",
+      background: `linear-gradient(90deg, transparent 0%, ${C.iriCyan}66 30%, ${C.iriViolet}aa 50%, ${C.iriRose}66 70%, transparent 100%)`,
       transform: `translate(-50%, -50%) rotate(${angle}deg) translateX(${(progress - 0.5) * 1500}px)`,
       opacity: op,
     }} />
@@ -273,9 +268,8 @@ export const FloatingGlyphs: React.FC = () => {
         return (
           <div key={i} style={{
             position: "absolute", left: g.x, top: g.y + float, width: g.size, height: g.size,
-            borderRadius: g.size * 0.28, background: C.glassFill,
-            backdropFilter: "blur(20px) saturate(160%)", WebkitBackdropFilter: "blur(20px) saturate(160%)",
-            border: `1px solid ${C.glassBorder}`,
+            borderRadius: g.size * 0.28, background: "rgba(255,255,255,0.80)",
+            border: "1px solid rgba(255,255,255,0.95)",
             boxShadow: "inset 0 1px 0 rgba(255,255,255,0.85), 0 8px 16px -4px rgba(120,100,180,0.18)",
             transform: `rotate(${g.rot}deg) scale(${scale})`, opacity: op * 0.85,
           }} />
@@ -310,7 +304,6 @@ const SplitLayout: React.FC<{
 const HookScene: React.FC = () => {
   const frame = useCurrentFrame();
   const heroScale = spring({ frame: frame - 6, fps: 30, config: { damping: 14, stiffness: 130 }, from: 0.7, to: 1 });
-  const heroBlur  = interpolate(frame, [6, 32], [16, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease.expoOut });
 
   const rightContent = (
     <>
@@ -320,7 +313,7 @@ const HookScene: React.FC = () => {
       <LightBeam delay={65} angle={-12} />
       <FloatingGlyphs />
       {/* Checklist card */}
-      <div style={{ transform: `scale(${heroScale}) blur(${heroBlur}px)`, willChange: "transform" }}>
+      <div style={{ transform: `scale(${heroScale})`, willChange: "transform" }}>
         <GlassCard radius={28} style={{ padding: "32px 40px", minWidth: 400 }}>
           {["Post consistently", "Clean website", "Look professional"].map((item, i) => {
             const local = frame - (40 + i * 18);
