@@ -4,6 +4,9 @@ import { Composition } from "remotion";
 import { MyComposition } from "./Composition";
 import { MyReelReel } from "./MyReelReel";
 import { BrandingReelReel } from "./BrandingReelReel";
+import { GraphifyBrandReel } from "./GraphifyBrandReel";
+import { GstackBrandReel } from "./GstackBrandReel";
+import { PaperclipBrandReel } from "./PaperclipBrandReel";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -30,6 +33,33 @@ export const RemotionRoot: React.FC = () => {
           id="BrandingReelReel"
           component={BrandingReelReel}
           durationInFrames={1625}
+          fps={30}
+          width={1080}
+          height={1920}
+        />
+
+        <Composition
+          id="GraphifyBrandReel"
+          component={GraphifyBrandReel}
+          durationInFrames={1956}
+          fps={30}
+          width={1080}
+          height={1920}
+        />
+
+        <Composition
+          id="GstackBrandReel"
+          component={GstackBrandReel}
+          durationInFrames={2820}
+          fps={30}
+          width={1080}
+          height={1920}
+        />
+
+        <Composition
+          id="PaperclipBrandReel"
+          component={PaperclipBrandReel}
+          durationInFrames={1650}
           fps={30}
           width={1080}
           height={1920}
